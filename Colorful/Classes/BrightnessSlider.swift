@@ -19,7 +19,7 @@ internal class BrightnessSlider: UIView {
     private lazy var scales: [CALayer] = {
         var scales = (0..<20).map { _ -> CALayer in
             let layer = CALayer()
-            layer.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1).cgColor
+            layer.backgroundColor = #colorLiteral(red: 0.1450980392, green: 0.1450980392, blue: 0.1450980392, alpha: 1).cgColor
             return layer
         }
         return scales
