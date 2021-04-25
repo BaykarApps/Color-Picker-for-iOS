@@ -1,11 +1,3 @@
-//
-//  Entity.swift
-//  ColorPicker3
-//
-//  Created by Hayashi Ryota on 2019/02/16.
-//  Copyright © 2019 Hayashi Ryota. All rights reserved.
-//
-
 import UIKit
 
 public enum HRColorSpace {

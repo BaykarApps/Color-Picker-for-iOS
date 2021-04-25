@@ -1,11 +1,3 @@
-//
-//  HRColorPicker.swift
-//  ColorPicker3
-//
-//  Created by Hayashi Ryota on 2019/02/16.
-//  Copyright © 2019 Hayashi Ryota. All rights reserved.
-//
-
 import UIKit
 
 public final class ColorPicker: UIControl {
@@ -18,10 +10,10 @@ public final class ColorPicker: UIControl {
         }
     }
 
-    private let brightnessCursor = BrightnessCursor()
-    private let brightnessSlider = BrightnessSlider()
     private let colorMap = ColorMapView()
     private let colorMapCursor = ColorMapCursor()
+    private let brightnessCursor = BrightnessCursor()
+    private let brightnessSlider = BrightnessSlider()
 
     private lazy var hsvColor: HSVColor = { preconditionFailure() }()
 
@@ -52,6 +44,7 @@ public final class ColorPicker: UIControl {
         colorMap.addGestureRecognizer(colorMapTap)
 
         brightnessSlider.delegate = self
+        brightnessCursor.delegate = self
 
         feedbackGenerator.prepare()
     }
@@ -68,8 +61,8 @@ public final class ColorPicker: UIControl {
     public override func layoutSubviews() {
         super.layoutSubviews()
 
-        let margin: CGFloat = 12
-        let brightnessSliderWidth: CGFloat = 72
+        let margin: CGFloat = 10
+        let brightnessSliderWidth: CGFloat = 75
         let colorMapSize = min(bounds.width - brightnessSliderWidth - margin * 3, bounds.height - 2 * margin)
 
         let colorMapX = (bounds.width - (colorMapSize + margin * 2 + brightnessSliderWidth)) / 2
@@ -78,7 +71,7 @@ public final class ColorPicker: UIControl {
         brightnessSlider.frame = CGRect(x: colorMap.frame.maxX, y: (bounds.height - colorMapSize)/2,
                                         width: brightnessSliderWidth, height: colorMapSize)
 
-        let brightnessCursorSize = CGSize(width: brightnessSliderWidth, height: 28)
+        let brightnessCursorSize = CGSize(width: brightnessSliderWidth, height: 30)
         brightnessCursor.frame = CGRect(x: colorMap.frame.maxX,
                                         y: (bounds.height - brightnessCursorSize.height)/2,
                                         width: brightnessCursorSize.width, height: brightnessCursorSize.height)
@@ -155,5 +148,15 @@ extension ColorPicker: BrightnessSliderDelegate {
         mapColorToView()
         feedbackIfNeeds()
         sendActionIfNeeds()
+    }
+}
+
+extension ColorPicker:CursorDelegate{
+    func didColorChanged(hsv: HSVColor?) {
+        if let hsvColor = hsv{
+            self.hsvColor = hsvColor
+            mapColorToView()
+            sendActionIfNeeds()
+        }
     }
 }
