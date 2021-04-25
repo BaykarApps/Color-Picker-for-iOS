@@ -70,7 +70,7 @@ internal class ColorMapView: UIView {
     
     private func setup() {
         updateStrokeColor()
-        backgounrdLayer.backgroundColor = UIColor.black.cgColor
+        backgounrdLayer.backgroundColor = UIColor.clear.cgColor
         backgounrdLayer.lineWidth = borderWidth
         layer.addSublayer(backgounrdLayer)
         colorMap.mask = maskLayer

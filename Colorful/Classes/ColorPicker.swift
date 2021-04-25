@@ -47,6 +47,8 @@ public final class ColorPicker: UIControl {
         brightnessCursor.delegate = self
 
         feedbackGenerator.prepare()
+        
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didViewTapped)))
     }
 
     public func set(color: UIColor, colorSpace: HRColorSpace) {
@@ -123,7 +125,9 @@ public final class ColorPicker: UIControl {
         }
     }
 
-    // ↑似た構造ではあるのだが、本質的に異なるので分けた
+    @objc private func didViewTapped(){
+        self.endEditing(true)
+    }
     private var prevSentActionHSV: HSVColor?
     private func sendActionIfNeeds() {
         if prevSentActionHSV != hsvColor {

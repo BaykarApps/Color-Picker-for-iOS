@@ -83,7 +83,11 @@ internal class BrightnessSlider: UIView {
     private func updateShadowColor() {
         let bgColor: UIColor
         if #available(iOS 13.0, *) {
-            bgColor = UIColor.systemBackground
+            if traitCollection.userInterfaceStyle == .dark{
+                bgColor = #colorLiteral(red: 0.1450980392, green: 0.1450980392, blue: 0.1450980392, alpha: 1)
+            }else{
+                bgColor = UIColor.white
+            }
         } else {
             bgColor = UIColor.white
         }
